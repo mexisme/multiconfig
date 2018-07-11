@@ -1,6 +1,9 @@
 package marshal
 
 import (
+	"path/filepath"
+	"strings"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -55,4 +58,8 @@ func (s *Config) checkAttributes() error {
 	}
 
 	return nil
+}
+
+func (s *Config) extn() string {
+	return strings.ToLower(filepath.Ext(s.path))
 }
