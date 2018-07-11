@@ -1,5 +1,12 @@
 package marshal
 
+import (
+	"path/filepath"
+	"strings"
+
+	log "github.com/sirupsen/logrus"
+)
+
 // ConfigMap is a convenience type for the internal EnvVar map
 type ConfigMap map[string]string
 
@@ -30,10 +37,12 @@ func (s *Config) AddPathBody(path, body string) *Config {
 func (s *Config) Map() (ConfigMap, error) {
 	if s.parsed == nil {
 		if err := s.checkAttributes(); err != nil {
+			log.WithError(err).Debug("Error with attributes")
 			return nil, err
 		}
 
 		if err := s.unmarshallIntoParsed(); err != nil {
+			log.WithError(err).Debug("Error with parsing config files")
 			return nil, err
 		}
 	}
@@ -49,4 +58,8 @@ func (s *Config) checkAttributes() error {
 	}
 
 	return nil
+}
+
+func (s *Config) extn() string {
+	return strings.ToLower(filepath.Ext(s.path))
 }

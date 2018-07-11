@@ -1,9 +1,9 @@
 package multiconfig
 
 import (
-	"github.com/mexisme/multiconfig/marshal"
-
 	"sort"
+
+	"github.com/mexisme/multiconfig/marshal"
 )
 
 /*

@@ -3,9 +3,9 @@ package marshal
 import (
 	"encoding/json"
 	"fmt"
-	"path/filepath"
 	"strings"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/subosito/gotenv"
 	// "github.com/hashicorp/hcl"
 	// "github.com/magiconair/properties"
@@ -32,7 +32,9 @@ func (s *Config) mapToConfigMap(tree interface{}) ConfigMap {
 }
 
 func (s *Config) unmarshallIntoParsed() error {
-	extn := strings.ToLower(filepath.Ext(s.path))
+	extn := s.extn()
+
+	log.WithFields(log.Fields{"Path": s.path, "Extension": extn}).Debug("Reading file...")
 
 	switch extn {
 	case ".env":
@@ -65,6 +67,7 @@ func (s *Config) unmarshallIntoParsed() error {
 
 	// case ".properties", ".props", ".prop":
 	default:
+		log.WithField("extension", extn).Debug("Unsupported format")
 		return UnsupportedFormatError(extn)
 	}
 
