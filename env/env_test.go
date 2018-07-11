@@ -15,7 +15,7 @@ var _ = Describe("The env package", func() {
 				"B": "2",
 			}
 
-			e := New().WithEnvMap(envMap)
+			e := New().AddEnvMap(envMap)
 			Expect(e.ToOsEnviron()).To(ConsistOf([]string{
 				"A=1",
 				"B=2",
@@ -40,7 +40,7 @@ var _ = Describe("The env package", func() {
 				},
 			}
 
-			e := New().WithEnvMaps(&envMap)
+			e := New().AddEnvMaps(&envMap)
 			Expect(e.Combine()).To(Equal(Map{
 				"A": "1",
 				"B": "2",

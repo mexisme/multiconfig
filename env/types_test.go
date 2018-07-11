@@ -16,7 +16,7 @@ var _ = Describe("The env type", func() {
 				"B": "2",
 			}
 
-			e := New().WithEnvMap(envMap)
+			e := New().AddEnvMap(envMap)
 			Expect(e.EnvMaps).To(Equal(Maps{
 				{
 					"A": "1",
@@ -39,7 +39,7 @@ var _ = Describe("The env type", func() {
 				"F": "6",
 			}
 
-			e := New().WithEnvMap(envMap1).WithEnvMap(envMap2).WithEnvMap(envMap3)
+			e := New().AddEnvMap(envMap1).AddEnvMap(envMap2).AddEnvMap(envMap3)
 			Expect(e.EnvMaps).To(Equal(Maps{
 				{
 					"A": "1",
@@ -72,7 +72,7 @@ var _ = Describe("The env type", func() {
 				},
 			}
 
-			e := New().WithEnvMaps(&envMap)
+			e := New().AddEnvMaps(&envMap)
 			Expect(e.EnvMaps).To(Equal(Maps{
 				{
 					"A": "1",
@@ -97,7 +97,7 @@ var _ = Describe("The env type", func() {
 				"BB=22",
 			}
 
-			e := New().WithOsEnviron(environ)
+			e := New().AddOsEnviron(environ)
 			Expect(e.EnvMaps).To(Equal(Maps{
 				{
 					"AA": "11",
@@ -114,7 +114,7 @@ var _ = Describe("The env type", func() {
 B=2
 C=3`)
 
-			e := New().WithMultiConfigs(env)
+			e := New().AddMultiConfig(env)
 			Expect(e.EnvMaps).To(Equal(Maps{
 				{
 					"A": "1",

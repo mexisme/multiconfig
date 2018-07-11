@@ -13,7 +13,7 @@ type Details struct {
 
 // MultiConfig interfaces to a type supporting the Combine() method -- usually the "multiconfig" package
 type MultiConfig interface {
-	Combine() map[string]string
+	Combine() (map[string]string, error)
 }
 
 // New creates a new env.Details struct
@@ -21,8 +21,8 @@ func New() *Details {
 	return &Details{}
 }
 
-// WithEnvMaps creates a new env.Details object, with the contents of a Maps object added to its EnvMaps
-func (s *Details) WithEnvMaps(envs *Maps) *Details {
+// AddEnvMaps creates a new env.Details object, with the contents of a Maps object added to its EnvMaps
+func (s *Details) AddEnvMaps(envs *Maps) *Details {
 	clone := *s // This does a shallow clone
 
 	if clone.EnvMaps == nil {
@@ -33,18 +33,19 @@ func (s *Details) WithEnvMaps(envs *Maps) *Details {
 	return &clone
 }
 
-// WithEnvMap creates a new env.Details object, with each Map object arg to its EnvMaps
-func (s *Details) WithEnvMap(env ...Map) *Details {
+// AddEnvMap creates a new env.Details object, with each Map object arg to its EnvMaps
+func (s *Details) AddEnvMap(env ...Map) *Details {
 	newEnvs := append(make(Maps, 0), env...)
-	return s.WithEnvMaps(&newEnvs)
+	return s.AddEnvMaps(&newEnvs)
 }
 
-// WithMultiConfigs creates a new env.Details struct, with the dotEnv KV map object added to its EnvMaps
-func (s *Details) WithMultiConfigs(dotEnvs MultiConfig) *Details {
-	return s.WithEnvMap(dotEnvs.Combine())
+// AddMultiConfig creates a new env.Details struct, with the dotEnv KV map object added to its EnvMaps
+func (s *Details) AddMultiConfig(configs MultiConfig) *Details {
+	combinedConfigs, _ := configs.Combine()
+	return s.AddEnvMap(combinedConfigs)
 }
 
-// WithOsEnviron creates a new env.Details struct, with the given env (usually an os.Environ array) added to its EnvMaps
-func (s *Details) WithOsEnviron(env []string) *Details {
-	return s.WithEnvMap(s.envToMap(env))
+// AddOsEnviron creates a new env.Details struct, with the given env (usually an os.Environ array) added to its EnvMaps
+func (s *Details) AddOsEnviron(env []string) *Details {
+	return s.AddEnvMap(s.envToMap(env))
 }
