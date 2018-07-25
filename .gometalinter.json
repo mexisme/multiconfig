@@ -1,0 +1,17 @@
+{
+    "Enable": [
+        "golint",
+        "vet",
+        "goconst",
+        "interfacer",
+        "dupl",
+        "gocyclo",
+        "deadcode",
+        "unconvert",
+        "varcheck",
+        "structcheck",
+        "errcheck",
+        "megacheck",
+        "gas"
+    ]
+}
