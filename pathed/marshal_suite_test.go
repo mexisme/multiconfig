@@ -1,4 +1,4 @@
-package marshal_test
+package pathed_test
 
 import (
 	. "github.com/onsi/ginkgo"
@@ -9,5 +9,5 @@ import (
 
 func TestEnv(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Marshal Suite")
+	RunSpecs(t, "multiconfig/pathed Suite")
 }
