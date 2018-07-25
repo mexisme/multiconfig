@@ -1,18 +1,35 @@
 package multiconfig
 
-import (
-	"github.com/mexisme/multiconfig/marshal"
-)
+// BodyMap is the type used for mapping $NAME = "Value" pairs.
+type BodyMap map[string]string
 
-// Configs contains map of "path" --> BodyEnv structs
-type Configs map[string]*marshal.Config
-
-// MultiConfig is simply the struct method-wrapper for the "multiconfig" package
-type MultiConfig struct {
-	configs Configs
+/*
+ItemInterface is the interface for a config map, providing the methods needed to sort a set of configs,
+as well as for extracting the BodyMap (for merging, later)
+*/
+type ItemInterface interface {
+	Key() string
+	ToBodyMap() (BodyMap, error)
 }
 
-// New creates a new MultiConfigs struct
-func New() *MultiConfig {
-	return &MultiConfig{configs: make(Configs)}
+// Map is the type of config list.
+// This is a list of sort-keys associated to a config item (i.e. ItemInterface)
+type Map struct {
+	items []ItemInterface
+}
+
+// New struct
+func New() *Map {
+	return &Map{}
+}
+
+// AddItem is for adding another item to the config list.
+func (s *Map) AddItem(item ...ItemInterface) *Map {
+	s.items = append(s.items, item...)
+	return s
+}
+
+// Items returns a copy of the current config items.
+func (s *Map) Items() []ItemInterface {
+	return s.items[:]
 }

@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestMultiConfig(t *testing.T) {
+func TestConfigmap(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "MultiConfig Suite")
+	RunSpecs(t, "multiconfig Suite")
 }
