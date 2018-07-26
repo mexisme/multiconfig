@@ -3,14 +3,16 @@ package env
 import (
 	"fmt"
 	"strings"
+
+	"github.com/mexisme/multiconfig/common"
 )
 
-func envToMap(env Envs) (BodyMap, error) {
+func envToMap(env Envs) (common.BodyMap, error) {
 	if len(env) < 1 {
 		return nil, EmptyAttributeError("env")
 	}
 
-	newEnv := make(BodyMap)
+	newEnv := make(common.BodyMap)
 
 	for _, envLine := range env {
 		kv := strings.SplitN(envLine, "=", 2)
@@ -24,7 +26,7 @@ func envToMap(env Envs) (BodyMap, error) {
 	return newEnv, nil
 }
 
-func mapToEnv(bodyMap BodyMap) (Envs, error) {
+func mapToEnv(bodyMap common.BodyMap) (Envs, error) {
 	if bodyMap == nil {
 		return nil, EmptyAttributeError("bodyMap")
 	}

@@ -1,6 +1,7 @@
 package pathed_test
 
 import (
+	"github.com/mexisme/multiconfig/common"
 	. "github.com/mexisme/multiconfig/pathed"
 
 	. "github.com/onsi/ginkgo"
@@ -11,9 +12,9 @@ import (
 var _ = Describe("multiconfig/pathed/unmarshal", func() {
 	Context("when unmarshalling", func() {
 		DescribeTable("",
-			func(path, body string, bodyMap BodyMap) {
+			func(path, body string, bodyMap common.BodyMap) {
 				if bodyMap == nil {
-					bodyMap = BodyMap{
+					bodyMap = common.BodyMap{
 						"A": "  A1A1  ",
 						"B": "12",
 						"C": "over there",

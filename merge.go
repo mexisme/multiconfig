@@ -1,5 +1,7 @@
 package multiconfig
 
+import "github.com/mexisme/multiconfig/common"
+
 /*
 Merge all the BodyMap's provided into a single BodyMap, return a new BodyMap.
 
@@ -10,9 +12,9 @@ in a BodyMap will override earlier ones.
 i.e. a BodyMap with a Key() of "z..." will be merged-in after those with a Key()
 of "a..."
 */
-func (s *Map) Merge() (BodyMap, error) {
+func (s *Map) Merge() (common.BodyMap, error) {
 	sorted := s.Sorted()
-	joined := make(BodyMap)
+	joined := make(common.BodyMap)
 
 	for _, item := range (*sorted).items {
 		body, err := item.ToBodyMap()
@@ -26,7 +28,7 @@ func (s *Map) Merge() (BodyMap, error) {
 	return joined, nil
 }
 
-func (s *Map) mergeBodies(from, to BodyMap) {
+func (s *Map) mergeBodies(from, to common.BodyMap) {
 	for k, v := range from {
 		to[k] = v
 	}

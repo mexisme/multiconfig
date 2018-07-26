@@ -1,7 +1,6 @@
 package multiconfig
 
-// BodyMap is the type used for mapping $NAME = "Value" pairs.
-type BodyMap map[string]string
+import "github.com/mexisme/multiconfig/common"
 
 /*
 ItemInterface is the interface for a config map, providing the methods needed to sort a set of configs,
@@ -9,7 +8,7 @@ as well as for extracting the BodyMap (for merging, later)
 */
 type ItemInterface interface {
 	Key() string
-	ToBodyMap() (BodyMap, error)
+	ToBodyMap() (common.BodyMap, error)
 }
 
 // Map is the type of config list.

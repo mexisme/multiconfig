@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/mexisme/multiconfig/common"
 	"github.com/subosito/gotenv"
 	// "github.com/hashicorp/hcl"
 	// "github.com/magiconair/properties"
@@ -59,8 +60,8 @@ func (s *Config) Unmarshal() error {
 	return nil
 }
 
-func (s *Config) mapToConfigMap(tree interface{}) BodyMap {
-	parsed := make(BodyMap)
+func (s *Config) mapToConfigMap(tree interface{}) common.BodyMap {
+	parsed := make(common.BodyMap)
 
 	switch tree.(type) {
 	case gotenv.Env:

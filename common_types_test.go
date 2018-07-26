@@ -1,8 +1,8 @@
 package multiconfig_test
 
-import (
-	. "github.com/mexisme/multiconfig"
-)
+import "github.com/mexisme/multiconfig/common"
+
+// . "github.com/mexisme/multiconfig"
 
 type ItemArr struct {
 	Body map[string]string
@@ -12,7 +12,7 @@ func (s *ItemArr) Key() string {
 	return ""
 }
 
-func (s *ItemArr) ToBodyMap() (BodyMap, error) {
+func (s *ItemArr) ToBodyMap() (common.BodyMap, error) {
 	return s.Body, nil
 }
 
@@ -25,6 +25,6 @@ func (s *ItemMap) Key() string {
 	return s.K
 }
 
-func (s *ItemMap) ToBodyMap() (BodyMap, error) {
+func (s *ItemMap) ToBodyMap() (common.BodyMap, error) {
 	return s.Body, nil
 }
