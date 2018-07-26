@@ -3,6 +3,8 @@ package pathed
 import (
 	"path/filepath"
 	"strings"
+
+	"github.com/mexisme/multiconfig/common"
 )
 
 // ConfigFormats defines the type for the *Format enum.
@@ -21,16 +23,13 @@ const (
 	JSONFormat
 )
 
-// BodyMap is type of the post-unmarshaled / parsed copy of the KV pairs.
-type BodyMap map[string]string
-
 /*
 Config contains the given "path", "extn" and "body" of a
 config, as well as the parsed config --> KV map.
 */
 type Config struct {
 	path, extn, body string
-	parsed           BodyMap
+	parsed           common.BodyMap
 }
 
 // New object
@@ -68,7 +67,7 @@ func (s *Config) Body() string {
 }
 
 // ToBodyMap returns the parsed map, for use by the configs package.
-func (s *Config) ToBodyMap() (BodyMap, error) {
+func (s *Config) ToBodyMap() (common.BodyMap, error) {
 	if s.parsed == nil {
 		if err := s.Unmarshal(); err != nil {
 			return nil, err

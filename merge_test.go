@@ -2,6 +2,7 @@ package multiconfig_test
 
 import (
 	. "github.com/mexisme/multiconfig"
+	"github.com/mexisme/multiconfig/common"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -14,27 +15,27 @@ var _ = Describe("The configs package", func() {
 
 			e.AddItem(&ItemMap{
 				K: "a",
-				Body: BodyMap{
+				Body: common.BodyMap{
 					"A": "1",
 					"B": "2",
 				},
 			},
 				&ItemMap{
 					K: "b",
-					Body: BodyMap{
+					Body: common.BodyMap{
 						"C": "3",
 						"D": "4",
 					},
 				},
 				&ItemMap{
 					K: "c",
-					Body: BodyMap{
+					Body: common.BodyMap{
 						"E": "5",
 						"F": "6",
 					},
 				})
 
-			Expect(e.Merge()).To(Equal(BodyMap{
+			Expect(e.Merge()).To(Equal(common.BodyMap{
 				"A": "1",
 				"B": "2",
 				"C": "3",

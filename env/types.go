@@ -2,10 +2,9 @@ package env
 
 import (
 	"os"
-)
 
-// BodyMap is type of the post-unmarshaled / parsed copy of the KV pairs.
-type BodyMap map[string]string
+	"github.com/mexisme/multiconfig/common"
+)
 
 // Envs is the type of an os.Environ-provided env-list.
 type Envs []string
@@ -16,7 +15,7 @@ config, as well as the parsed config --> KV map.
 */
 type Config struct {
 	env    Envs
-	parsed BodyMap
+	parsed common.BodyMap
 }
 
 // New object.
@@ -36,7 +35,7 @@ func (s *Config) SetEnv(env Envs) *Config {
 }
 
 // SetBodyMap creates a new env.Configs object, with the contents of a Maps object added to its EnvMaps.
-func (s *Config) SetBodyMap(env BodyMap) *Config {
+func (s *Config) SetBodyMap(env common.BodyMap) *Config {
 	s.parsed = env
 	// We don't want to parse it here, partly so we don't have to deal with
 	// returning an error, but also because it feels more-appropriate to
@@ -75,7 +74,7 @@ func (s *Config) ToOsEnviron() (Envs, error) {
 }
 
 // ToBodyMap returns the parsed map, for use by the configs package.
-func (s *Config) ToBodyMap() (BodyMap, error) {
+func (s *Config) ToBodyMap() (common.BodyMap, error) {
 	var err error
 	if s.parsed == nil {
 		s.parsed, err = envToMap(s.env)
