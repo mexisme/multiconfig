@@ -15,7 +15,7 @@ import (
 )
 
 // Unmarshal decodes/parses the given s.body string into the s.parsed field.
-// TODO: Use Viper, instead:
+// TODO: Use Viper, instead, especially if https://github.com/spf13/viper/pull/528 is accepted
 func (s *Config) Unmarshal() error {
 	if err := s.checkAttributes(); err != nil {
 		return err
