@@ -10,6 +10,8 @@ It can merge them together into a single KV-style string (i.e. `map[string]strin
 
 It can then convert that map into a array of strings in the same format as `os.Environ()` provides, and compatible with the "Env" field of the [os/exec.Cmd](https://golang.org/pkg/os/exec/#Cmd) type and the `envv` arg [syscall.Exec](https://golang.org/pkg/syscall/#Exec) function.
 
+More detail can be found in [godoc.org](https://godoc.org/github.com/mexisme/multiconfig).
+
 ## Supported config sources
 Currently, it supports:
 - Reading enviroment variables provided to the binary / app
