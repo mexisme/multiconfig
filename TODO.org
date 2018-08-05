@@ -1,21 +1,22 @@
-* TODO Fully leverage the [Viper](https://github.com/spf13/viper) package to parse config files.
-  - If https://github.com/spf13/viper/pull/528 is accepted, this would mean it can `*.env` files directly.
-* TODO Support flattening nested objects, e.g:
-```
-{
-    "a": {
-        "b": {
-            "c": 1
-        }
-        "d": {
-            "e": 2
+* Features
+** TODO Fully leverage the [Viper](https://github.com/spf13/viper) package to parse config files.
+   - If https://github.com/spf13/viper/pull/528 is accepted, this would mean it can `*.env` files directly.
+** TODO Support flattening nested objects, e.g:
+
+    {
+        "a": {
+            "b": {
+                "c": 1
+            }
+            "d": {
+                "e": 2
+            }
         }
     }
-}
-```
-  to:
-```
-a_b_c = 1
-a_b_d = 2
-```
-* TODO Support taking config from a Reader object
+
+to:
+
+    a_b_c = 1
+    a_b_d = 2
+
+** TODO Support taking config from a Reader object
