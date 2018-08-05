@@ -1,3 +1,9 @@
+/*
+Package env helps with conversion to / from os.Environ() formatted environment variable lists.
+That includes as needed by os/exec.Cmd ("Env" field) and syscall.Exec ("envv" argument).
+
+
+*/
 package env
 
 import (

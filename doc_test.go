@@ -31,12 +31,8 @@ func Example_environ() {
 		"C=over there",
 		"D= 15.1 ",
 	})
-	c1 := pathed.New().SetPath("/a1.toml").SetBody(`
-A = "A2"
-`)
-	c2 := pathed.New().SetPath("/b2.yaml").SetBody(`
-B: "not 12"
-`)
+	c1 := pathed.New().SetPath("/a1.toml").SetBody(`A = "A2"`)
+	c2 := pathed.New().SetPath("/b2.yaml").SetBody(`B: "not 12"`)
 	config := multiconfig.New().AddItem(e, c1, c2)
 	merged, _ := config.Merge()
 
