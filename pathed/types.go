@@ -8,8 +8,11 @@ The path is an arbitrary string, used by the wrapping multiconfig package as the
 The file-extension of the path defines the format:
 
 - .env -- Dot-env file
+
 - .toml -- TOML file
+
 - .yaml, .yml -- YAML file
+
 - .json -- JSON file
 
 The body is the contents of the above file, as string type.

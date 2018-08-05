@@ -16,16 +16,12 @@ func Example_merged() {
 		"C=over there",
 		"D= 15.1 ",
 	})
-	c1 := pathed.New().SetPath("/a1.toml").SetBody(`
-A = "A2"
-`)
-	c2 := pathed.New().SetPath("/b2.yaml").SetBody(`
-B: "not 12"
-`)
+	c1 := pathed.New().SetPath("/a1.toml").SetBody(`A = "A2"`)
+	c2 := pathed.New().SetPath("/b2.yaml").SetBody(`B: "not 12"`)
 	config := multiconfig.New().AddItem(env, c1, c2)
 	merged, _ := config.Merge()
-	fmt.Printf("Merged config: %v", merged)
-	// Output: Merged config: map[A:A2 B:not 12 C:over there D: 15.1 ]
+	fmt.Printf("Merged config: %#v", merged)
+	// Output: Merged config: common.BodyMap{"A":"A2", "B":"not 12", "C":"over there", "D":" 15.1 "}
 }
 
 func Example_environ() {
@@ -47,6 +43,6 @@ B: "not 12"
 	newEnv := env.New().SetBodyMap(merged)
 	newOsEnviron, _ := newEnv.ToOsEnviron()
 	sort.Strings(newOsEnviron)
-	fmt.Printf("New os.Environ: %v", newOsEnviron)
-	// Output: New os.Environ: [A=A2 B=not 12 C=over there D= 15.1 ]
+	fmt.Printf("New os.Environ: %#v", newOsEnviron)
+	// Output: New os.Environ: env.Envs{"A=A2", "B=not 12", "C=over there", "D= 15.1 "}
 }
