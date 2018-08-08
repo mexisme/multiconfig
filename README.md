@@ -23,6 +23,23 @@ Currently, it supports:
 ## Caveats
 Since the output format is intended to be compatible with `os.Environ()` it's assumed the provided configs are also flat KV-pairs, with a `string` value.
 
+## Build/Test
+This is a library, meant to be imported into another binary, so "build" doesn't really
+make sense in this context.
+
+However, there is a [`Makefile`](./Makefile) -- copied from another of my projects, so needs
+some tidying for this project -- to wrap certain functionality:
+
+- Tests:
+  - `make test` will run the Ginkgo/Gomega based tests
+  - `make test-verbose coverage` will also generate coverage report(s)
+- Vendorising packages:
+  - Currently using Go [`dep`](https://github.com/golang/dep), at least until Go v1.11 is
+    released
+  - `make vendor` will download dependencies to the local `./vendor/` directory
+  - `touch Gopkg.toml; make vendor` should try to update the vendorised packages to the
+    next most-appropriate version(s) (depending on the SemVer constraints)
+
 ## Background
 The primary reason for supporting multiple configs is for providing secrets and credentials to an app:
 different groups of secrets were accessible to different teams, but all needed to be made available to the underlying app
